@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import Form from './Form'
 
 export default function Repos() {
-  const user = Form.user
+  const [user, setUser] = useState()
   const [repositories, setRepositories] = useState([])
 
   useEffect(() => {
@@ -11,7 +10,7 @@ export default function Repos() {
     const data = await response.json();
     setRepositories(data)
     // console.log(data)
-    // console.log(user)
+    console.log(user)
     }
     fetchData()
   }, [user]);
@@ -24,9 +23,33 @@ function handleFavourite(id) {
   setRepositories(newRepositories)
 }
 
+const handleChange = e => {
+  e.preventDefault()
+  const {value} = e.target
+  // console.log(value)
+  setUser(value)
+}
+
+const handleSubmit = e => {
+  e.preventDefault()
+  // console.log('user', {user})
+}
+
   return (
     <div>
       <div>
+        <div>
+       <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="for ex: vilsorjunior"
+          value={user}
+          name="user"
+          onChange={handleChange}
+          />
+          <button type='submit'>Submit</button>
+        </form>
+     </div>
           <ul>
             { repositories.map(repo => (
               <li key={repo.id}>
