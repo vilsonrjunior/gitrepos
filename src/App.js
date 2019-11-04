@@ -1,33 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react'
+import Header from './Components/Header'
+import Form from './Components/Form'
+import Repos from './Components/Repos'
 
-export default function App() {
-  const [repositories, setRepositories] = useState([])
+function App(){
 
-  useEffect(async () => {
-    const response = await fetch('https://api.github.com/users/vilsonrjunior/repos')
-    const data = await response.json();
+return(
+  <div>
+    <Header />
+    <Form />
+    <Repos />
+  </div>
 
-    setRepositories(data)
-  }, []);
-
-function handleFavourite(id) {
-  const newRepositories = repositories.map(repo => {
-    return repo.id === id ? { ...repo, favourite: !repo.favourite } : repo
-  })
-
-  setRepositories(newRepositories)
-}
-
-  return (
-
-      <ul>
-        { repositories.map(repo => (
-          <li key={repo.id}>
-          {repo.name}
-          {repo.favourite && <span>(Favourite)</span>}
-          <button onClick={() => handleFavourite(repo.id)}>Favourite</button>
-          </li>
-          ))}
-      </ul>
   )
 }
+
+export default App
