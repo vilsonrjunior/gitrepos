@@ -9,11 +9,10 @@ export default function Repos() {
     const response = await fetch(`https://api.github.com/users/${user}/repos`)
     const data = await response.json();
     setRepositories(data)
-    // console.log(data)
-    console.log(user)
     }
     fetchData()
   }, [user]);
+
 
 
 function handleFavourite(id) {
@@ -26,13 +25,13 @@ function handleFavourite(id) {
 const handleChange = e => {
   e.preventDefault()
   const {value} = e.target
-  // console.log(value)
   setUser(value)
 }
 
 const handleSubmit = e => {
   e.preventDefault()
-  // console.log('user', {user})
+  // const {value} = e.target
+  console.log('user', {user})
 }
 
   return (
